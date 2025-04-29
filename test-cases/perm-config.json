@@ -1,0 +1,18 @@
+{
+  "tests": [
+    {
+      "description": "Viewer reads post",
+      "userId": "viewer",
+      "resource": "Act",
+      "action": "read",
+      "expected": "allow"
+    },
+    {
+      "description": "Editor update post",
+      "userId": "JaySmith",
+      "resource": "Act",
+      "action": "update",
+      "expected": "allow"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "permission-testing-toolkit",
+  "author": "Dmytro Werner",
+  "version": "0.1.0",
+  "description": "CLI tool to test application permissions using Permit.io",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^5.2.0",
+    "commander": "^11.0.0",
+    "dotenv": "^16.5.0",
+    "permitio": "^2.7.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.4.2"
+  }
+}

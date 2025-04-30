@@ -30,8 +30,9 @@ async function main() {
     const permitClient = new PermitClient(permitApiKey);
     const tester = new TesterEngine(permitClient);
 
-    const results = await tester.runTests(config.tests); // 👈 not config directly, but config.tests array
-    printReport(results);
+    const results = await tester.runTests(config.tests);
+    const results2 = await tester.runTestsFromSchema();
+    printReport(results2);
   } catch (error) {
     console.error("❌ Error:", (error as Error).message);
     process.exit(1);

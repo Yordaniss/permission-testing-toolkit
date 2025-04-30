@@ -21,6 +21,15 @@ export class TesterEngine {
   }
 
   async runTests(testCases: TestCase[]): Promise<TestResult[]> {
+    return this.checkTestResult(testCases);
+  }
+
+  async runTestsFromSchema(): Promise<TestResult[]> {
+    const testCases = await this.permitClient.fetchTestsFromSchema();
+    return this.checkTestResult(testCases);
+  }
+
+  async checkTestResult(testCases: TestCase[]): Promise<TestResult[]> {
     const results: TestResult[] = [];
 
     for (const testCase of testCases) {
@@ -29,9 +38,9 @@ export class TesterEngine {
         resource: testCase.resource,
         action: testCase.action,
       });
-      
+
       const actual = allowed ? "allow" : "deny";
-      
+
       results.push({
         ...testCase,
         actual,

@@ -1,4 +1,3 @@
-// src/reporter/reporter.ts
 import { TestResult } from "../tester/testerEngine";
 
 export function printReport(results: TestResult[]): void {

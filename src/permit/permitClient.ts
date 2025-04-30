@@ -50,7 +50,6 @@ export class PermitClient {
     for (const user of users.data) {
       for (const resource of resources) {
         const actions = resource.actions ?? {};
-        console.log(user);
 
         for (const [actionKey] of Object.entries(actions)) {
           testCases.push({

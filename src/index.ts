@@ -1,8 +1,8 @@
-import "dotenv/config";  // 👈 This will load your .env file
+import "dotenv/config";
 import { Command } from "commander";
 import { loadConfig } from "./config/configLoader";
-import { TesterEngine } from "./tester/testerEngine";  // ⬅️ Only import the class, not 'runTests' function
-import { PermitClient } from "./permit/permitClient";   // ⬅️ You also need PermitClient
+import { TesterEngine } from "./tester/testerEngine";
+import { PermitClient } from "./permit/permitClient";
 import { printReport } from "./reporter/reporter";
 
 const program = new Command();

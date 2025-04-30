@@ -42,19 +42,20 @@ export class PermitClient {
   }
 
   async fetchTestsFromSchema(): Promise<TestCase[]> {
-    const roles = await this.permit.api.roles.list();
+    const users = await this.permit.api.users.list();
     const resources = await this.permit.api.resources.list();
 
     const testCases: TestCase[] = [];
 
-    for (const role of roles) {
+    for (const user of users.data) {
       for (const resource of resources) {
         const actions = resource.actions ?? {};
+        console.log(user);
 
         for (const [actionKey] of Object.entries(actions)) {
           testCases.push({
-            description: `Check ${actionKey} for ${role.key}`,
-            userId: role.key,
+            description: `Check ${actionKey} for ${user.key}`,
+            userId: user.key,
             resource: resource.key,
             action: actionKey,
             expected: "allow",

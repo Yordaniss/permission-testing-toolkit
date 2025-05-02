@@ -1,4 +1,5 @@
 import { TestResult } from "../tester/testerEngine";
+import chalk from 'chalk';
 
 export function printReport(results: TestResult[]): void {
   console.log("\n📝 Permission Test Report:");
@@ -19,5 +20,8 @@ export function printReport(results: TestResult[]): void {
   });
 
   const passed = results.filter(r => r.passed).length;
-  console.log(`\n✔️  ${passed}/${results.length} tests passed.`);
+  console.log(chalk.blue.bold("\nSummary:"));
+  console.log(chalk.green(`✔ Passed: ${passed}`));
+  console.log(chalk.red(`✘ Failed: ${results.length - passed}`));
+  console.log(chalk.bold(`Total: ${results.length}\n`));
 }

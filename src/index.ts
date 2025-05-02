@@ -1,25 +1,43 @@
 import "dotenv/config";
-import { Command } from "commander";
 import { loadConfig } from "./config/configLoader";
 import { TesterEngine } from "./tester/testerEngine";
 import { PermitClient } from "./permit/permitClient";
 import { printReport } from "./reporter/reporter";
+import { Command } from 'commander';
+import chalk from 'chalk';
+import figlet from 'figlet';
 
 const program = new Command();
 
 program
-  .name("Permission Testing Toolkit")
-  .description("CLI tool to test permissions using Permit.io")
+  .name("perm-check")
+  .description("CLI to test application permissions with Permit.io")
   .version("0.1.0")
-  .option("-c, --config <path>", "Path to config file", "test-cases/perm-config.json")
+  .helpOption("-h, --help", "Show help")
+  .option(
+    "-c, --config <path>",
+    "Path to config file",
+    "test-cases/perm-config.json"
+  )
   .option("-s, --schema", "Run tests from Permit.io schema instead of config")
+  .addHelpText(
+    "after",
+    `
+Examples:
+  $ perm-check --config test-cases/editor.json
+  $ perm-check --schema
+`
+  )
   .parse(process.argv);
 
 const options = program.opts();
 
 async function main() {
-  console.log("🚀 Starting Permission Tests...");
-
+  console.log(
+    chalk.cyanBright(
+      figlet.textSync("Perm-Check", { horizontalLayout: "default" })
+    )
+  );  
   try {
     const permitApiKey = process.env.PERMIT_API_KEY;
     if (!permitApiKey) {
@@ -32,11 +50,11 @@ async function main() {
     let results;
 
     if (options.schema) {
-      console.log("📡 Running tests generated from Permit.io schema...");
+      console.log(chalk.yellow("Fetching and running schema-based tests...\n"));
       results = await tester.runTestsFromSchema();
     } else {
       const config = await loadConfig(options.config);
-      console.log(`📂 Running tests from config file: ${options.config}`);
+      console.log(chalk.yellow(`Running tests from config: ${options.config}\n`));
       results = await tester.runTests(config.tests);
     }
 

@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "CLI tool to test application permissions using Permit.io",
   "main": "dist/index.js",
+  "bin": {
+    "perm-check": "dist/index.js"
+  },
   "scripts": {
     "start": "npm run build && node dist/index.js",
     "build": "tsc"
